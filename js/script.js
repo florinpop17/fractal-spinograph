@@ -78,7 +78,7 @@ function createCircles() {
             var newX = prevCircle.x - prevCircle.r - newR;
             var newY = prevCircle.y - prevCircle.r - newR;
 
-            var newSpeed = prevCircle.speed * speedAmp;
+            var newSpeed =  -1 * prevCircle.speed * speedAmp;
 
             // create it on same X
             circles.push(new Circle(newX, newY, newR, newSpeed));
