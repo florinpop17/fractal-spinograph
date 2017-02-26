@@ -19,11 +19,11 @@ function setup() {
 
     createCircles();
 
-    circlesP = createP('Number of circles: '+nrCircles);
+    circlesP = createP('Number of circles that orbit: '+nrCircles);
     circlesSlider = createSlider(3, 8, nrCircles, 1);
     circlesSlider.changed(function() {
         nrCircles = circlesSlider.value();
-        circlesP.html('Number of circles: '+nrCircles);
+        circlesP.html('Number of circles that orbit: '+nrCircles);
         reset();
     });
 
