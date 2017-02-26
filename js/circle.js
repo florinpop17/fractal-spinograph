@@ -9,7 +9,7 @@ class Circle{
 
     show() {
         noFill();
-        stroke(255, 100);
+        stroke(255, 10);
         strokeWeight(1);
         ellipse(this.x, this.y, this.r * 2, this.r * 2);
     }
