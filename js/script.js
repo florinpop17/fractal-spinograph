@@ -1,4 +1,5 @@
 var circles = [];
+var path = [];
 var nrCircles = 4;
 
 var speed = 0.01;
@@ -15,7 +16,18 @@ function draw() {
     circles.forEach((circle, idx) => {
         circle.update(circles[idx - 1]);
         circle.show();
+
+        // if it's last, add it's position to the path array
+        if(idx === nrCircles - 1){
+            path.push({
+                x: circle.x,
+                y: circle.y
+            })
+        }
+
     });
+
+    drawPath();
 }
 
 function createCircles() {
@@ -42,4 +54,17 @@ function createCircles() {
             circles.push(new Circle(width / 2, height / 2, 100, speed));
         }
     }
+}
+
+function drawPath() {
+    beginShape();
+
+    strokeWeight(2);
+    stroke(255, 0, 255);
+
+    path.forEach(dot => {
+        vertex(dot.x, dot.y);
+    });
+
+    endShape();
 }
