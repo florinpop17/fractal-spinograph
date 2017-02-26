@@ -2,12 +2,46 @@ var circles = [];
 var path = [];
 var nrCircles = 4;
 
-var speed = 0.01;
+var speed = 0.005;
+var speedAmp = 4;
+
+var circlesP;
+var circlesSlider;
+
+var speedP;
+var speedSlider;
+
+var speedAmpP;
+var speedAmpSlider;
 
 function setup() {
     createCanvas(600, 600);
 
     createCircles();
+
+    circlesP = createP('Number of circles: '+nrCircles);
+    circlesSlider = createSlider(3, 8, nrCircles, 1);
+    circlesSlider.changed(function() {
+        nrCircles = circlesSlider.value();
+        circlesP.html('Number of circles: '+nrCircles);
+        reset();
+    });
+
+    speedP = createP('Speed: '+speed);
+    speedSlider = createSlider(0.001, 0.05, speed, 0.002);
+    speedSlider.changed(function() {
+        speed = speedSlider.value();
+        speedP.html('Speed: '+speed);
+        reset();
+    });
+
+    speedAmpP = createP('Speed amplitude: '+speedAmp);
+    speedAmpSlider = createSlider(2, 20, speedAmp, 1);
+    speedAmpSlider.changed(function() {
+        speedAmp = speedAmpSlider.value();
+        speedAmpP.html('Speed amplitude: '+speedAmp);
+        reset();
+    });
 }
 
 function draw() {
@@ -44,7 +78,7 @@ function createCircles() {
             var newX = prevCircle.x - prevCircle.r - newR;
             var newY = prevCircle.y - prevCircle.r - newR;
 
-            var newSpeed = prevCircle.speed * 2;
+            var newSpeed = prevCircle.speed * speedAmp;
 
             // create it on same X
             circles.push(new Circle(newX, newY, newR, newSpeed));
@@ -67,4 +101,10 @@ function drawPath() {
     });
 
     endShape();
+}
+
+function reset() {
+    circles = [];
+    path = [];
+    createCircles();
 }
